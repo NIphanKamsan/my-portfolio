@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | นักศึกษา</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body { font-family: 'Prompt', sans-serif; background-color: #0b132b; color: #fff; overflow-x: hidden; }
+
+    /* ─── Navbar ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(11, 19, 43, 0.95);
+      padding: 15px 60px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    nav .logo { font-weight: 700; letter-spacing: 1px; font-size: 1.5rem; }
+    nav ul { list-style: none; display: flex; gap: 30px; }
+    nav ul li a {
+      color: #fff; text-decoration: none; font-weight: 500;
+      position: relative; transition: 0.3s;
+    }
+    nav ul li a:hover { color: #ff4d4d; }
+    nav ul li a::after {
+      content: ""; position: absolute; bottom: -6px; left: 0;
+      width: 0%; height: 2px; background-color: #ff4d4d; transition: 0.3s;
+    }
+    nav ul li a:hover::after { width: 100%; }
+
+    /* ─── Hero Section ─── */
+    .hero {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .left img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(70%);
+      transition: 0.5s ease;
+      transform: scale(1.1);
+    }
+    .left:hover img {
+      filter: brightness(85%) saturate(110%);
+      transform: scale(1.15);
+    }
+    .left span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 5rem;
+      font-weight: 800;
+      color: #fff;
+      z-index: 2;
+      letter-spacing: 2px;
+      text-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .right {
+      flex: 1;
+      background-color: #0b132b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 5rem;
+      font-weight: 800;
+      position: relative;
+      overflow: hidden;
+    }
+    .right::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255,77,77,0.1) 0%, rgba(11,19,43,0.9) 100%);
+      z-index: 1;
+    }
+    .right span {
+      position: relative;
+      z-index: 2;
+    }
+    .divider {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px; height: 12px;
+      background-color: #fff;
+      border-radius: 50%;
+      z-index: 10;
+      box-shadow: 0 0 20px rgba(255,255,255,0.7);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.5); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    /* ─── Floating Particles ─── */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      background-color: rgba(255,255,255,0.7);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+    }
+
+    /* ─── Section ─── */
+    .section {
+      min-height: 100vh;
+      padding: 100px 10%;
+      background-color: #fff;
+      color: #111;
+      position: relative;
+    }
+    .section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%230b132b" opacity="0.03"><polygon points="1000,100 1000,0 0,100"/></svg>');
+      background-size: cover;
+      z-index: 0;
+    }
+    .section > * {
+      position: relative;
+      z-index: 1;
+    }
+    h2 {
+      color: #e63946;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      border-left: 5px solid #e63946;
+      padding-left: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #e63946, transparent);
+    }
+    p, li { font-size: 1.1rem; line-height: 1.8; }
+    ul { margin-left: 20px; }
+
+    /* ─── Portfolio & Training ─── */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .card {
+      background-color: #f8f9fa;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      position: relative;
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    .card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(230,57,70,0.1));
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card:hover::before {
+      opacity: 1;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .card:hover img {
+      transform: scale(1.1);
+    }
+    .card p {
+      padding: 15px;
+      color: #111;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ─── Typing Effect ─── */
+    .typewriter {
+      overflow: hidden;
+      border-right: 3px solid #ff4d4d;
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #ff4d4d }
+    }
+
+    /* ─── Contact Form ─── */
+    .contact-form {
+      margin-top: 30px;
+      max-width: 600px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: 'Prompt', sans-serif;
+      transition: all 0.3s ease;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: #e63946;
+      box-shadow: 0 0 0 2px rgba(230,57,70,0.2);
+    }
+    .btn {
+      background-color: #e63946;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Prompt', sans-serif;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #c1121f;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(230,57,70,0.4);
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background-color: #0b132b;
+      color: white;
+      text-align: center;
+      padding: 30px 0;
+      position: relative;
+    }
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #e63946, #ff4d4d, #e63946);
+    }
+
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; }
+      .left, .right { height: 50vh; }
+      .left span, .right { font-size: 3rem; }
+      nav { padding: 15px 20px; }
+      nav ul { gap: 15px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Navbar ─── -->
+  <nav id="navbar">
+    <div class="logo">NIPHAN</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#profile">My Profile</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#training">Training</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ─── Hero Section ─── -->
+  <section id="home" class="hero">
+    <div class="particles" id="particles"></div>
+    <div class="left">
+      <img src="work2.jpg.jpg" alt="Love Section Image">
+      <span></span>
+    </div>
+    <div class="divider"></div>
+    <div class="right"><span class="typewriter">Hello</span></div>
+  </section>
+
+  <!-- ─── Profile Section ─── -->
+  <section id="profile" class="section">
+    <h2>My Profile</h2>
+    <p> เกี่ยวกับฉัน </p>
+    <p> สวัสดีครับ ผมชื่อ นิพันธ์ คำแสน ชื่อเล่น เขตต์ </p>
+    <p> My name NIPHAN KAMSAN  </p>
+    <p> คณะวิทยาศาสตร์ </p>
+    <p> สาขาวิทยาการคอมพิวพ์เตอร์ </p>
+    <p> ความสนใจเฉพาะทาง AI WED </p>
+
+    <h2></h2>
+    <h2></h2>
+    <h2></h2>
+
+
+    <h2>SKills</h2>
+    <p> ภาษา: C++, HTML/CSS, Data SQL, Python, Java </p>
+    <p> Tools: ChatGPT, Google Gemini, Git </p>
+    <p> Figma, Visual Studio, VS Code, Kaggle, XAMPP </p>
+
+
+
+    <h2></h2>
+    <h2></h2>
+    <h2></h2>
+
+
+
+
+    <h2>การศึกษา</h2>
+    <p> อนุบาล-ประถมศึกษา: โนนป่าหว้านเชียงฮาย <p></p>
+      <p>มัธยมต้น: โนนป่าหว้านเชียงฮาย</p>   
+      <p>ระดับ ปวช.: โรงเรียนสุวรรณคูหาพิทยาสรรค์</p>  
+      <p>ระดับ ปริญญาตรี: มหาวิทยาลัยอุดรธานี (ยังศึกษาอยู่) </p>
+  </section>
+
+
+  <!-- ─── Portfolio Section ─── -->
+  <section id="portfolio" class="section">
+    <h2>Portfolio</h2>
+    <div class="gallery">
+      <div class="card">
+        <img src="work10.png" alt="Project 1">
+        <p>เว็บไซต์ระบบขายสิ้นค้า — ออกแบบด้วย HTML, CSS และ JavaScript</p>
+      </div>
+      <!-- เพิ่มช่องรูปภาพใหม่ 2 ช่อง -->
+      
+      <div class="card">
+  </section>
+
+  <!-- ─── Training Section ─── -->
+  <section id="training" class="section">
+    <h2>Training</h2>
+    <div class="gallery">
+      <div class="card">
+        <img src="work3.jpg.jpg" alt="Training 1">
+        <p>เข้าร่วมการแข่งขัน Startup</p>
+      </div>
+      <div class="card">
+        <img src="work4.jpg.jpg" alt="Training 2">
+        <p> เข้าร่วมให้ความรู้นอกมหาลัย เรื่อง Pictoblox </p>
+      </div>
+      <div class="card">
+        <img src="work8.jpg" alt="Training 2">
+        <p> เข้าร่วมให้ความรู้นอกมหาลัย  </p>
+      </div>
+      <div class="card">
+        <img src="work7.jpg" alt="Training 2">
+        <p> เข้าร่วมให้ความรู้ เรื่อง Chatbot </p>
+      </div>
+      <div class="card">
+        <img src="work5.jpg.jpg" alt="Training 2">
+        <p> เข้าร่วมการแข่งขัน Chatbot </p>
+      </div>
+      <div class="card">
+        <img src="work9.jpg" alt="Training 2">
+        <p> เข้าร่วมให้ความรู้นอกมหาลัย เรื่อง AR </p>
+      </div>
+      <div class="card">
+        <img src="work6.jpg" alt="Training 3">
+        <p> เข้าร่วมการอบรมเป็น วิทยากร  AR  </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Contact Section ─── -->
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>สามารถติดต่อผมได้ที่ช่องทางต่อไปนี้:</p>
+    <ul>
+      <li>📧 Email: 66040249105@udru.ac.th</li>
+      <li>📞 โทร: 064-860-4240</li>
+      <li>➰ github: niphan kamsan </li>
+      <li>🌐 Facebook: <a href="https://www.facebook.com/niphan.kamsan?mibextid=wwXIfr&rdid=A8kzKkdVCX3tRSMZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1AXC5HxJFv%2F%3Fmibextid%3DwwXIfr#      " target="_blank">facebook.com/yourname</a></li>
+    </ul>
+    
+    <div class="contact-form">
+      <h3>ส่งข้อความถึงฉัน</h3>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">ชื่อ</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">อีเมล</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">ข้อความ</label>
+          <textarea id="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn">ส่งข้อความ</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 NIPHAN KAMSAN.</p>
+  </footer>
+
+  <script>
+    // Floating particles effect
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random properties
+        const size = Math.random() * 5 + 2;
+        const left = Math.random() * 100;
+        const animationDuration = Math.random() * 20 + 10;
+        const animationDelay = Math.random() * 5;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.animationDuration = `${animationDuration}s`;
+        particle.style.animationDelay = `${animationDelay}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+    
+    // Card animation on scroll
+    function animateCards() {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (cardTop < windowHeight - 100) {
+          card.classList.add('visible');
+        }
+      });
+    }
+    
+    // Form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('ขอบคุณสำหรับข้อความ! ฉันจะติดต่อกลับไปเร็วๆ นี้');
+      this.reset();
+    });
+    
+    // Initialize
+    window.addEventListener('load', function() {
+      createParticles();
+      animateCards();
+    });
+    
+    window.addEventListener('scroll', animateCards);
+  </script>
+</body>
+</html>
